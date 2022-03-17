@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="use.user.dao.UserMapper">
+	<resultMap id="BaseResultMap"
+		type="javaservertest.user.model.UserModel">
+		<id column="USER_ID" property="userId" jdbcType="VARCHAR" />
+		<result column="USER_LOGIN_ID" property="userLoginId"
+			jdbcType="VARCHAR" />
+		<result column="USER_LOGIN_PWD" property="userLoginPwd"
+			jdbcType="VARCHAR" />
+		<result column="NAME" property="name" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		USER_ID,USER_LOGIN_ID,USER_LOGIN_PWD, NAME
+	</sql>
+	<insert id="insert"
+		parameterType="javaservertest.user.model.UserModel">
+		insert into USER_TABLE
+		(
+			USER_ID
+			,USER_LOGIN_ID
+			,USER_LOGIN_PWD
+			, NAME)
+		values 
+		(
+			#{userId,jdbcType=VARCHAR}
+			,#{userLoginId,jdbcType=VARCHAR}
+			,#{userLoginPwd,jdbcType=VARCHAR}
+			,#{name,jdbcType=VARCHAR}
+		)
+	</insert>
+</mapper>
