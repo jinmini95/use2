@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="javaservertest.user.dao.UserMapper">
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="use.user.dao.UserMapper">
 	<resultMap id="BaseResultMap"
-		type="javaservertest.user.model.UserModel">
+		type="use.user.model.UserModel">
 		<id column="USER_ID" property="userId" jdbcType="VARCHAR" />
 		<result column="USER_LOGIN_ID" property="userLoginId"
 			jdbcType="VARCHAR" />
@@ -14,7 +16,7 @@
 		USER_ID,USER_LOGIN_ID,USER_LOGIN_PWD, NAME
 	</sql>
 	<insert id="insert"
-		parameterType="javaservertest.user.model.UserModel">
+		parameterType="use.user.model.UserModel">
 		insert into USER_TABLE
 		(
 			USER_ID
@@ -29,4 +31,24 @@
 			,#{name,jdbcType=VARCHAR}
 		)
 	</insert>
+	<select id="login" parameterType="hashMap" resultType="use.user.model.UserModel">
+		select
+			USER_ID as userId
+			,USER_LOGIN_ID as userLoginId
+			,USER_LOGIN_PWD as userLoginPwd
+			,NAME
+		from user_table
+		where USER_LOGIN_ID = #{userLoginId} and USER_LOGIN_PWD = #{userLoginPwd} 
+	</select>
+	
+	<select id="idCheck" parameterType="java.lang.String" resultType="use.user.model.UserModel">
+		select
+			USER_ID as userId
+			,USER_LOGIN_ID as userLoginId
+			,USER_LOGIN_PWD as userLoginPwd
+			,NAME
+		from user_table
+		where USER_LOGIN_ID = #{userLoginId} 
+	</select>
+	
 </mapper>
